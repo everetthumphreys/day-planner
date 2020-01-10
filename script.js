@@ -1,7 +1,7 @@
 var time = moment().format("HH");
-console.log(time)
+// console.log(time)
 
-var workingHours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 ];
+var workingHours = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 ];
 
 for (var i = 0; i < workingHours.length; i++) {
     var rowDiv = document.createElement("div");
@@ -32,23 +32,39 @@ for (var i = 0; i < workingHours.length; i++) {
     var saveIcon = document.createElement("i");
     document.getElementsByClassName("saveBtn")[i].appendChild(saveIcon);
     saveIcon.setAttribute("class", "far fa-save");
+
+
+    var timeParsed = parseInt(time)
+    // console.log(timeParsed)
+    // console.log(workingHours[i])
+
+    if (workingHours[i] < timeParsed) {
+    document.getElementsByClassName("form-control")[i].setAttribute("class", "form-control past");
+    }
+    if (workingHours[i] === timeParsed) {
+    document.getElementsByClassName("form-control")[i].setAttribute("class", "form-control present");
+    }
+    if (workingHours[i] > timeParsed) {
+    document.getElementsByClassName("form-control")[i].setAttribute("class", "form-control future");
+    }
+
+    saveButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        var note = document.getElementsByClassName("form-control")[i].value;
+        console.log(note)
+        localStorage.setItem("note", note);
+        renderSavedNotes();
+    });
 };
 
-var timeParsed = parseInt(time)
-console.log(timeParsed)
-
-if (workingHours[i] < timeParsed) {
-    document.getElementsByClassName("form-control")[i].setAttribute("class", "form-control past");
-}
-if (workingHours[i] === timeParsed) {
-    document.getElementsByClassName("form-control")[i].setAttribute("class", "form-control present");
-}
-if (workingHours[i] < timeParsed) {
-    document.getElementsByClassName("form-control")[i].setAttribute("class", "form-control future");
-}
+// function renderSavedNotes {
+//     var savedNote = localStorage.getItem("note");
+//     formControlTextArea.value = savedNote;
+//  };
 
 
-
+var currentTime = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
+document.getElementById("currentDay").innerText = currentTime;
 
 
 
