@@ -8,18 +8,17 @@ function retrieveNote(key) {
 $(document).ready(function() {
     $("#currentDay").text(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"));
     for (let i = 9; i < 18; i++) {
-        let rowDiv = $(`<div id='${i}' data-time=${i} class="row">`);
-        let colDiv = $(`<div class="col-lg-12 textInput">`);
-        let inputGroupDiv = $(`<div class="input-group">`);
-        let inputGroupPrependDiv = $(`<div class="input-group-prepend">`);
-        let inputGroupTextSpan = $(`<span class="input-group-text hour">`);
+        const rowDiv = $(`<div id='${i}' data-time='${i}' class="row">`);
+        const colDiv = $(`<div class="col-lg-12 textInput">`);
+        const inputGroupDiv = $(`<div class="input-group">`);
+        const inputGroupPrependDiv = $(`<div class="input-group-prepend">`);
+        const inputGroupTextSpan = $(`<span class="input-group-text hour">`);
+        const inputGroupAppendDiv = $(`<div id="button-addon4" class="input-group-append">`);
         let formControlTextArea = $(`<textarea id='text${i}' class="form-control past">`);
-        let inputGroupAppendDiv = $(`<div id="button-addon4" class="input-group-append">`);
-        let saveButton = $(`<button id=${i} class="btn btn-success saveBtn">`);
+        let saveButton = $(`<button id='${i}' class="btn btn-success saveBtn">`);
         let saveIcon = $(`<i div id='${i}' class="far fa-save">`);
         let hourIndex = formatAMPM(i);
         let time = parseInt((moment().format("HH")));
-        let hour = i;
 
         $(".container").append(rowDiv);
         rowDiv.append(colDiv);
@@ -41,12 +40,12 @@ $(document).ready(function() {
             return hourIndex + ampm;
         }
 
-        console.log(hour, time);
+        console.log(i, time);
 
         function updateColors() {
-            if (hour === time) {
+            if (i == time) {
                 $(`#text${i}`).attr("class", "form-control present");
-            } else if (hour < time) {
+            } else if (i < time) {
                 $(`#text${i}`).attr("class", "form-control future");
             }
         }
