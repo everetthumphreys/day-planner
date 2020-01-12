@@ -40,18 +40,18 @@ $(document).ready(function() {
             return hourIndex + ampm;
         }
 
-        console.log(i, time);
+        // console.log(i, time);
 
         function updateColors() {
-            if (i == time) {
+            if (i === time) {
                 $(`#text${i}`).attr("class", "form-control present");
-            } else if (i < time) {
+            } else if (i > time) {
                 $(`#text${i}`).attr("class", "form-control future");
             }
         }
         updateColors();
     }
-    var saveBtn = $('.saveBtn');
+    const saveBtn = $('.saveBtn');
     saveBtn.on('click', function() {
         let eventId = $(this).attr('id');
         let eventText = $(this).parent().siblings('.form-control').val();
